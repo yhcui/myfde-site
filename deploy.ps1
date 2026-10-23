@@ -44,6 +44,8 @@ git remote set-url origin (git -C $PSScriptRoot remote get-url origin)
 if ((git -C $PSScriptRoot remote) -contains "gitee") { git remote add gitee (git -C $PSScriptRoot remote get-url gitee) }
 # 以上一版远程 deploy 为父提交，保持线性历史（服务器才能正常 git pull）
 git fetch --quiet origin deploy 2>$null
+if ($LASTEXITCODE -ne 0) { git fetch --quiet origin deploy 2>$null }
+if ($LASTEXITCODE -ne 0) { Write-Host "  警告: 未能获取上一版 deploy，本次为全新历史（服务器请用 fetch+reset）" -ForegroundColor Yellow }
 if (git rev-parse --verify --quiet origin/deploy) {
   git checkout --quiet -f -B deploy origin/deploy
 } else {

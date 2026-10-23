@@ -39,7 +39,7 @@ git config core.autocrlf false
 git remote set-url origin "$(git -C "$SRC" remote get-url origin)"
 if git -C "$SRC" remote | grep -qx gitee; then git remote add gitee "$(git -C "$SRC" remote get-url gitee)"; fi
 # 以上一版远程 deploy 为父提交，保持线性历史（服务器才能正常 git pull）
-git fetch --quiet origin deploy 2>/dev/null || true
+git fetch --quiet origin deploy 2>/dev/null || git fetch --quiet origin deploy 2>/dev/null || echo "  警告: 未能获取上一版 deploy，本次为全新历史（服务器请用 fetch+reset）"
 if git rev-parse --verify --quiet origin/deploy >/dev/null; then
   git checkout --quiet -f -B deploy origin/deploy
 else
