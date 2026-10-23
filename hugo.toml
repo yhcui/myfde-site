@@ -1,4 +1,4 @@
-baseURL = "https://myfde.top/"
+﻿baseURL = "https://myfde.top/"
 locale = "zh-CN"
 defaultContentLanguage = "zh"
 title = "myfde · FDE 前沿部署记录"
@@ -16,6 +16,7 @@ rssLimit = 20
   github = "https://github.com/yhcui"
   location = "济南"
   icp = ""
+  googleSiteVerification = ""
 
 [markup]
   [markup.highlight]
