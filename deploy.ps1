@@ -45,7 +45,7 @@ if ((git -C $PSScriptRoot remote) -contains "gitee") { git remote add gitee (git
 # 以上一版远程 deploy 为父提交，保持线性历史（服务器才能正常 git pull）
 git fetch --quiet origin deploy 2>$null
 if (git rev-parse --verify --quiet origin/deploy) {
-  git checkout --quiet -B deploy origin/deploy
+  git checkout --quiet -f -B deploy origin/deploy
 } else {
   git checkout --quiet --orphan deploy
 }
