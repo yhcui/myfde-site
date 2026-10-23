@@ -143,7 +143,7 @@ hugo server
 
 ```bash
 # 1. 拉取站点：服务器从 Gitee 拉（国内快）；GitHub 是主仓 + 国际镜像
-git clone -b deploy https://gitee.com/你的Gitee用户名/myfde-site.git /var/www/myfde
+git clone -b deploy https://gitee.com/kuguagua/myfde-site.git /var/www/myfde
 
 # 2. 把 deploy/nginx-myfde.conf.txt 合并进 nginx server 块
 #    （保留原有 listen / ssl_certificate 行），然后：
@@ -161,8 +161,7 @@ cd /var/www/myfde && git pull
 - 服务器**永远只拉 `deploy` 分支**（纯 HTML），服务器不装 hugo、不跑任何进程
 - `deploy.ps1` / `deploy.sh` 每次**同时推送** GitHub（origin）和 Gitee（gitee）两个远程
 - 写作电脑开发、clone 用 GitHub；服务器拉取用 Gitee（国内网络原因）
-- Gitee 仓库是镜像：在 Gitee 网页新建空仓库 `myfde-site`（不要初始化），本地执行一次
-  `git remote add gitee https://gitee.com/你的用户名/myfde-site.git` 即完成绑定
+- Gitee 仓库：https://gitee.com/kuguagua/myfde-site （已绑定，deploy 脚本自动双推）
 
 ---
 
