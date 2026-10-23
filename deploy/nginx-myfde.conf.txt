@@ -18,7 +18,8 @@ server {
     index index.html;
 
     # 【追加】旧 URL 301（保住搜索引擎已有收录）
-    location = /index.html  { return 301 /; }
+    # ⚠ 绝对不要加 `location = /index.html { return 301 /; }`
+    #   它会被 index 模块的内部跳转命中，导致首页 301 死循环
     location = /fde.html    {
         if ($arg_slug) { return 301 /fde/$arg_slug/; }
         return 301 /fde/;
