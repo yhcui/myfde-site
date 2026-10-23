@@ -153,8 +153,13 @@ nginx -t && systemctl reload nginx
 ### 日常更新
 
 ```bash
-cd /var/www/myfde && git pull
+cd /var/www/myfde
+git fetch origin deploy
+git reset --hard origin/deploy
 ```
+
+> 服务器只读、不做本地修改，所以用 reset 强制对齐远程最稳（deploy 分支发布时会 force-push）。
+> 不要用 `git pull` 遇到 divergent 警告时去 merge。
 
 ### 双仓镜像说明
 

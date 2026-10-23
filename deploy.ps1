@@ -42,8 +42,14 @@ Set-Location $tmp
 git config core.autocrlf false
 git remote set-url origin (git -C $PSScriptRoot remote get-url origin)
 if ((git -C $PSScriptRoot remote) -contains "gitee") { git remote add gitee (git -C $PSScriptRoot remote get-url gitee) }
-git checkout --quiet --orphan deploy
-git rm -rf --cached --quiet .
+# 以上一版远程 deploy 为父提交，保持线性历史（服务器才能正常 git pull）
+git fetch --quiet origin deploy 2>$null
+if (git rev-parse --verify --quiet origin/deploy) {
+  git checkout --quiet -B deploy origin/deploy
+} else {
+  git checkout --quiet --orphan deploy
+}
+git rm -rf --cached --quiet . 2>$null
 Get-ChildItem -Exclude ".git" | Remove-Item -Recurse -Force
 Copy-Item -Path (Join-Path $PSScriptRoot "public\*") -Destination . -Recurse -Force
 git add -A

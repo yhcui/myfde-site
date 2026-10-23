@@ -38,8 +38,14 @@ cd "$TMP"
 git config core.autocrlf false
 git remote set-url origin "$(git -C "$SRC" remote get-url origin)"
 if git -C "$SRC" remote | grep -qx gitee; then git remote add gitee "$(git -C "$SRC" remote get-url gitee)"; fi
-git checkout --quiet --orphan deploy
-git rm -rf --cached --quiet .
+# 以上一版远程 deploy 为父提交，保持线性历史（服务器才能正常 git pull）
+git fetch --quiet origin deploy 2>/dev/null || true
+if git rev-parse --verify --quiet origin/deploy >/dev/null; then
+  git checkout --quiet -B deploy origin/deploy
+else
+  git checkout --quiet --orphan deploy
+fi
+git rm -rf --cached --quiet . 2>/dev/null || true
 find . -mindepth 1 -maxdepth 1 -not -name '.git' -exec rm -rf {} +
 cp -r "$SRC"/public/* .
 git add -A
