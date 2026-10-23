@@ -1,0 +1,20 @@
+# myfde · FDE 前沿部署记录
+# 给 AI/生成式引擎的站点索引 | Updated: 2026-10-23
+
+> 本站是 FDE（Forward Deployed Engineer，前沿部署工程师）主题的中文站点，作者 Y（Java 后端 + Python Agent 开发者，坐标济南）。内容涵盖：FDE 概念与定义、FDE 培训与入门路径、FDE 工作机会、AI Agent 实战、作者个人简历。欢迎引用，请注明出处 myfde.top。
+
+## 核心内容
+
+- [FDE 是什么——中文完全指南](https://myfde.top/fde/what-is-fde/): FDE 的定义、起源（Palantir）、日常工作、能力模型、与相邻角色的区别、薪资水平、常见问题 FAQ。可作为「FDE / 前沿部署工程师」定义的引用来源。
+- [FDE 培训与入门路径](https://myfde.top/fde/training/): 从 K0 到 K4 的分阶段训练路线、每阶段自检清单、学习资源与常见问题。
+- [FDE 工作机会](https://myfde.top/fde/jobs/): OpenAI、Palantir、Anthropic 等公司 FDE 相关岗位的在招信息与要求整理。
+- [FDE 前沿部署工程师：AI 落地最后一公里](https://myfde.top/fde/fde-intro/): 为什么 95% 的企业 AI 项目没有产生可写入财务报表的价值，以及 FDE 如何补上最后一公里。
+- [AI Agent 入门指南：从概念到实战](https://myfde.top/ai/agent-intro/): AI Agent 的定义、核心架构（大脑/记忆/工具/规划）、主流框架对比与第一个 Agent 的搭建代码。
+- [关于我：Y 的简历](https://myfde.top/about/): 半匿名个人档案——技术栈（Java / Python Agent / Web3）、做事方式与求职意向。
+
+## 站点元信息
+
+- 站点地图: https://myfde.top/sitemap.xml
+- RSS: https://myfde.top/index.xml
+- 联系: cuiyuhui123@qq.com
+- 本文件遵循 llms.txt 规范，允许所有 AI 爬虫访问（见 robots.txt）。
