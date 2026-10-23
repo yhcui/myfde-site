@@ -142,8 +142,8 @@ hugo server
 ### 首次部署（只做一次）
 
 ```bash
-# 1. 拉取站点（GitHub 慢就加 --depth 1）
-git clone -b deploy --depth 1 https://github.com/yhcui/myfde-site.git /var/www/myfde
+# 1. 拉取站点：服务器从 Gitee 拉（国内快）；GitHub 是主仓 + 国际镜像
+git clone -b deploy https://gitee.com/你的Gitee用户名/myfde-site.git /var/www/myfde
 
 # 2. 把 deploy/nginx-myfde.conf.txt 合并进 nginx server 块
 #    （保留原有 listen / ssl_certificate 行），然后：
@@ -156,11 +156,13 @@ nginx -t && systemctl reload nginx
 cd /var/www/myfde && git pull
 ```
 
-### 注意事项
+### 双仓镜像说明
 
-- 服务器**永远只拉 `deploy` 分支**（纯 HTML），不在服务器上装 hugo、不跑任何进程
-- nginx 配置里已含：旧 URL 301、`job.myfde.top` 整域跳转、`.git` 屏蔽、静态缓存
-- 若 GitHub 拉取超时：加 Gitee 镜像仓库，服务器改拉 Gitee（需要时再做）
+- 服务器**永远只拉 `deploy` 分支**（纯 HTML），服务器不装 hugo、不跑任何进程
+- `deploy.ps1` / `deploy.sh` 每次**同时推送** GitHub（origin）和 Gitee（gitee）两个远程
+- 写作电脑开发、clone 用 GitHub；服务器拉取用 Gitee（国内网络原因）
+- Gitee 仓库是镜像：在 Gitee 网页新建空仓库 `myfde-site`（不要初始化），本地执行一次
+  `git remote add gitee https://gitee.com/你的用户名/myfde-site.git` 即完成绑定
 
 ---
 
@@ -171,7 +173,7 @@ cd /var/www/myfde && git pull
 | `git push` 卡住/超时 | 那台电脑的 git 没走代理：`git config --global http.https://github.com.proxy http://127.0.0.1:代理端口` |
 | push 弹出浏览器登录 | 正常流程，登录一次即可 |
 | `hugo server` 报模板错误 | hugo 版本太老，重装最新版 |
-| 服务器 `git pull` 超时 | GitHub 国内不稳，重试或换 Gitee 镜像 |
+| 服务器 `git pull` 超时 | 检查 Gitee 远程是否正确：`git remote -v` 应指向 gitee.com |
 | 改了文章线上没变 | 忘了跑 `deploy.ps1` 或服务器没 `git pull` |
 
 ---

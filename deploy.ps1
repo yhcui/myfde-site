@@ -1,14 +1,19 @@
 # myfde 部署脚本：构建 -> 提交源码 -> 推 main -> 构建产物推 deploy 分支
-# 用法： .\deploy.ps1 [-Message "说明"] [-Remote origin]
-param(
-  [string]$Message = "",
-  [string]$Remote = "origin"
-)
+# 同时推送到所有远程仓库（origin=GitHub，gitee=Gitee 镜像，gitee 存在才推）
+# 用法： .\deploy.ps1 [-Message "说明"]
+param([string]$Message = "")
 
 $ErrorActionPreference = "Stop"
 Set-Location $PSScriptRoot
 
-# 1. 构建（--minify 压缩输出）
+# 收集远程仓库
+$remoteNames = @()
+foreach ($r in @("origin", "gitee")) {
+  if ((git remote) -contains $r) { $remoteNames += $r }
+}
+if ($remoteNames.Count -eq 0) { throw "没有配置远程仓库，先运行: git remote add origin <url>" }
+
+# 1. 构建
 Write-Host "[1/4] Hugo 构建..." -ForegroundColor Cyan
 hugo --minify --cleanDestinationDir
 if ($LASTEXITCODE -ne 0) { throw "Hugo 构建失败" }
@@ -24,27 +29,26 @@ if ($staged) {
   Write-Host "  源码无变更，跳过提交"
 }
 
-# 3. 推送 main（源码）
+# 3. 推送 main（源码）到所有远程
 Write-Host "[3/4] 推送 main 分支..." -ForegroundColor Cyan
-git push $Remote main
+foreach ($r in $remoteNames) { Write-Host "  -> $r"; git push $r main }
 
-# 4. 构建产物 -> deploy 分支（孤儿分支，每次重建，服务器只拉这个分支）
+# 4. 构建产物 -> deploy 分支（孤儿分支，每次重建），推到所有远程
 Write-Host "[4/4] 更新 deploy 分支..." -ForegroundColor Cyan
-$originUrl = git remote get-url origin
-if (-not $originUrl) { throw "没有 origin 远程仓库，先运行: git remote add origin <url>" }
 $tmp = Join-Path $env:TEMP "myfde-deploy-tmp"
 if (Test-Path $tmp) { Remove-Item -Recurse -Force $tmp }
 git clone --no-hardlinks --quiet $PSScriptRoot $tmp
 Set-Location $tmp
-git remote set-url origin $originUrl
 git config core.autocrlf false
+git remote set-url origin (git -C $PSScriptRoot remote get-url origin)
+if ((git -C $PSScriptRoot remote) -contains "gitee") { git remote add gitee (git -C $PSScriptRoot remote get-url gitee) }
 git checkout --quiet --orphan deploy
 git rm -rf --cached --quiet .
 Get-ChildItem -Exclude ".git" | Remove-Item -Recurse -Force
 Copy-Item -Path (Join-Path $PSScriptRoot "public\*") -Destination . -Recurse -Force
 git add -A
 git commit --quiet -m "deploy $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
-git push --force origin deploy
+foreach ($r in $remoteNames) { Write-Host "  -> $r"; git push --force $r deploy }
 Set-Location $PSScriptRoot
 Remove-Item -Recurse -Force $tmp
 
