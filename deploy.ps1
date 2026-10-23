@@ -30,17 +30,21 @@ git push $Remote main
 
 # 4. 构建产物 -> deploy 分支（孤儿分支，每次重建，服务器只拉这个分支）
 Write-Host "[4/4] 更新 deploy 分支..." -ForegroundColor Cyan
+$originUrl = git remote get-url origin
+if (-not $originUrl) { throw "没有 origin 远程仓库，先运行: git remote add origin <url>" }
 $tmp = Join-Path $env:TEMP "myfde-deploy-tmp"
 if (Test-Path $tmp) { Remove-Item -Recurse -Force $tmp }
 git clone --no-hardlinks --quiet $PSScriptRoot $tmp
 Set-Location $tmp
+git remote set-url origin $originUrl
+git config core.autocrlf false
 git checkout --quiet --orphan deploy
 git rm -rf --cached --quiet .
 Get-ChildItem -Exclude ".git" | Remove-Item -Recurse -Force
 Copy-Item -Path (Join-Path $PSScriptRoot "public\*") -Destination . -Recurse -Force
 git add -A
 git commit --quiet -m "deploy $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
-git push --force $Remote deploy
+git push --force origin deploy
 Set-Location $PSScriptRoot
 Remove-Item -Recurse -Force $tmp
 
