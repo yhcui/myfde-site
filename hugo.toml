@@ -6,6 +6,9 @@ enableGitInfo = true
 enableRobotsTXT = true
 rssLimit = 20
 
+[taxonomies]
+  tag = "tags"
+
 [params]
   author = "Y"
   description = "FDE（Forward Deployed Engineer，前沿部署工程师）路线的中文现场记录：概念、训练路径、工作机会与 AI Agent 实战。"

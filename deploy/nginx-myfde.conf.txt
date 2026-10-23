@@ -1,0 +1,60 @@
+# myfde.top nginx 配置片段
+# 合并进现有 server 块（保留你已有的 listen/ssl_certificate 等行），然后:
+#   nginx -t && systemctl reload nginx
+# 假设站点根目录为 /var/www/myfde（git clone -b deploy 的目录）
+
+# ---------- 主站 server 块内 ----------
+
+    server_name myfde.top www.myfde.top;
+    root /var/www/myfde;
+    index index.html;
+
+    # www 跳主域（如已有独立 server 块处理 www 可忽略此行）
+    # if ($host = www.myfde.top) { return 301 https://myfde.top$request_uri; }
+
+    # ---------- 旧 URL 301（保住已有收录） ----------
+    location = /index.html  { return 301 /; }
+    location = /fde.html    {
+        if ($arg_slug) { return 301 /fde/$arg_slug/; }
+        return 301 /fde/;
+    }
+    location = /agent.html  {
+        if ($arg_slug) { return 301 /ai/$arg_slug/; }
+        return 301 /ai/;
+    }
+    location = /tutorials.html { return 301 /fde/training/; }
+    location = /about.html     { return 301 /about/; }
+    location = /posts/         { return 301 /fde/; }
+
+    # ---------- 安全 ----------
+    location ~ /\.git { deny all; return 404; }
+
+    # ---------- 缓存 ----------
+    location ~* \.(css|svg|woff2?|png|jpg|xml|txt)$ {
+        expires 30d;
+        add_header Cache-Control "public";
+    }
+
+    # ---------- 404 ----------
+    error_page 404 /404.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+# ---------- 招聘子站 server 块（整块 301 到新位置） ----------
+# 替换 job.myfde.top 现有的 server 块（保留你已有的 listen / ssl_certificate 行）
+
+# server {
+#     listen 80;
+#     listen 443 ssl;
+#     server_name job.myfde.top;
+#     # ...保留你已有的 ssl 证书配置...
+#     location = / {
+#         if ($arg_slug) { return 301 https://myfde.top/fde/jobs/$arg_slug/; }
+#         return 301 https://myfde.top/fde/jobs/;
+#     }
+#     location / {
+#         return 301 https://myfde.top/fde/jobs/;
+#     }
+# }

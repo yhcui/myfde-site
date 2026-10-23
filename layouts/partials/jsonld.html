@@ -1,16 +1,16 @@
-{{ if .IsHome }}
+﻿{{ if .IsHome }}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": {{ site.Title | jsonify }},
-  "url": {{ site.Home.Permalink | jsonify }},
-  "description": {{ site.Params.description | jsonify }},
+  "name": {{ site.Title | jsonify | safeJS }},
+  "url": {{ site.Home.Permalink | jsonify | safeJS }},
+  "description": {{ site.Params.description | jsonify | safeJS }},
   "inLanguage": "zh-CN",
   "author": {
     "@type": "Person",
-    "name": {{ site.Params.author | jsonify }},
-    "url": {{ site.Params.github | jsonify }}
+    "name": {{ site.Params.author | jsonify | safeJS }},
+    "url": {{ site.Params.github | jsonify | safeJS }}
   }
 }
 </script>
@@ -27,7 +27,7 @@
       {{ $items = $items | append (dict "position" $pos "name" $name "url" .Permalink) }}{{ $pos = add $pos 1 }}
     {{ end }}
     {{ $items = $items | append (dict "position" $pos "name" .Title "url" .Permalink) }}
-    {{ range $i, $item := $items }}{{ if gt $i 0 }},{{ end }}{"@type": "ListItem", "position": {{ $item.position }}, "name": {{ $item.name | jsonify }}, "item": {{ $item.url | jsonify }}}{{ end }}
+    {{ range $i, $item := $items }}{{ if gt $i 0 }},{{ end }}{"@type": "ListItem", "position": {{ $item.position }}, "name": {{ $item.name | jsonify | safeJS }}, "item": {{ $item.url | jsonify | safeJS }}}{{ end }}
   ]
 }
 </script>
@@ -38,18 +38,18 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": {{ .Title | jsonify }},
-  "description": {{ with .Description }}{{ . | jsonify }}{{ else }}""{{ end }},
-  "url": {{ .Permalink | jsonify }},
-  "mainEntityOfPage": {{ .Permalink | jsonify }},
+  "headline": {{ .Title | jsonify | safeJS }},
+  "description": {{ with .Description }}{{ . | jsonify | safeJS }}{{ else }}""{{ end }},
+  "url": {{ .Permalink | jsonify | safeJS }},
+  "mainEntityOfPage": {{ .Permalink | jsonify | safeJS }},
   "datePublished": "{{ .PublishDate.Format "2006-01-02T15:04:05Z07:00" }}",
   "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
   "author": {
     "@type": "Person",
-    "name": {{ site.Params.author | jsonify }},
-    "url": {{ site.Params.github | jsonify }}
+    "name": {{ site.Params.author | jsonify | safeJS }},
+    "url": {{ site.Params.github | jsonify | safeJS }}
   },
-  "keywords": {{ with .Params.tags }}{{ delimit . ", " | jsonify }}{{ else }}""{{ end }},
+  "keywords": {{ with .Params.tags }}{{ delimit . ", " | jsonify | safeJS }}{{ else }}""{{ end }},
   "inLanguage": "zh-CN"
 }
 </script>
@@ -60,32 +60,33 @@
 {
   "@context": "https://schema.org",
   "@type": "JobPosting",
-  "title": {{ .Title | jsonify }},
-  "description": {{ plainify .Content | chomp | jsonify }},
+  "title": {{ .Title | jsonify | safeJS }},
+  "description": {{ plainify .Content | chomp | jsonify | safeJS }},
   "datePosted": "{{ .PublishDate.Format "2006-01-02T15:04:05Z07:00" }}",
   "validThrough": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
   "employmentType": "FULL_TIME",
-  "url": {{ .Permalink | jsonify }},
+  "url": {{ .Permalink | jsonify | safeJS }},
   "hiringOrganization": {
     "@type": "Organization",
-    "name": {{ .Params.company | jsonify }}{{ with .Params.companyUrl }},{{ end }}{{ with .Params.companyUrl }}"sameAs": {{ . | jsonify }}{{ end }}
+    "name": {{ .Params.company | jsonify | safeJS }}{{ with .Params.companyUrl }},{{ end }}{{ with .Params.companyUrl }}"sameAs": {{ . | jsonify | safeJS }}{{ end }}
   },
   "jobLocationType": "TELECOMMUTE",
   "jobLocation": {
     "@type": "Place",
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": {{ .Params.location | jsonify }},
-      "addressCountry": {{ .Params.country | default "US" | jsonify }}
+      "addressLocality": {{ .Params.location | jsonify | safeJS }},
+      "addressCountry": {{ .Params.country | default "US" | jsonify | safeJS }}
     }
-  }{{ with and .Params.salaryMin .Params.salaryMax }},
+  }  {{ $salaryMin := .Params.salaryMin }}{{ $salaryMax := .Params.salaryMax }}
+  {{ with and $salaryMin $salaryMax }},
   "baseSalary": {
     "@type": "MonetaryAmount",
     "currency": "USD",
     "value": {
       "@type": "QuantitativeValue",
-      "minValue": {{ .Params.salaryMin }},
-      "maxValue": {{ .Params.salaryMax }},
+      "minValue": {{ $salaryMin }},
+      "maxValue": {{ $salaryMax }},
       "unitText": "YEAR"
     }
   }{{ end }},
@@ -100,16 +101,16 @@
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Y",
-  "url": {{ .Permalink | jsonify }},
+  "url": {{ .Permalink | jsonify | safeJS }},
   "email": "mailto:{{ site.Params.email }}",
-  "jobTitle": {{ .Params.jobTitle | jsonify }},
-  "knowsAbout": {{ .Params.knowsAbout | jsonify }},
+  "jobTitle": {{ .Params.jobTitle | jsonify | safeJS }},
+  "knowsAbout": {{ .Params.knowsAbout | jsonify | safeJS }},
   "address": {
     "@type": "PostalAddress",
-    "addressLocality": {{ site.Params.location | jsonify }},
+    "addressLocality": {{ site.Params.location | jsonify | safeJS }},
     "addressCountry": "CN"
   },
-  "sameAs": [{{ site.Params.github | jsonify }}]
+  "sameAs": [{{ site.Params.github | jsonify | safeJS }}]
 }
 </script>
 {{ end }}
@@ -120,7 +121,7 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {{ range $i, $f := . }}{{ if gt $i 0 }},{{ end }}{"@type": "Question", "name": {{ $f.q | jsonify }}, "acceptedAnswer": {"@type": "Answer", "text": {{ $f.a | plainify | jsonify }}}}{{ end }}
+    {{ range $i, $f := . }}{{ if gt $i 0 }},{{ end }}{"@type": "Question", "name": {{ $f.q | jsonify | safeJS }}, "acceptedAnswer": {"@type": "Answer", "text": {{ $f.a | plainify | jsonify | safeJS }}}}{{ end }}
   ]
 }
 </script>
