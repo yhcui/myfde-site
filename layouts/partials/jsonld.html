@@ -1,0 +1,127 @@
+{{ if .IsHome }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": {{ site.Title | jsonify }},
+  "url": {{ site.Home.Permalink | jsonify }},
+  "description": {{ site.Params.description | jsonify }},
+  "inLanguage": "zh-CN",
+  "author": {
+    "@type": "Person",
+    "name": {{ site.Params.author | jsonify }},
+    "url": {{ site.Params.github | jsonify }}
+  }
+}
+</script>
+{{ else }}
+{{/* BreadcrumbList on all non-home pages */}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {{ $items := slice }}{{ $pos := 1 }}
+    {{ range .Ancestors.Reverse }}
+      {{ $name := .Title }}{{ if .IsHome }}{{ $name = site.Title }}{{ end }}
+      {{ $items = $items | append (dict "position" $pos "name" $name "url" .Permalink) }}{{ $pos = add $pos 1 }}
+    {{ end }}
+    {{ $items = $items | append (dict "position" $pos "name" .Title "url" .Permalink) }}
+    {{ range $i, $item := $items }}{{ if gt $i 0 }},{{ end }}{"@type": "ListItem", "position": {{ $item.position }}, "name": {{ $item.name | jsonify }}, "item": {{ $item.url | jsonify }}}{{ end }}
+  ]
+}
+</script>
+{{ end }}
+
+{{ if and (eq .Kind "page") (ne .Params.kind "job") (ne .Params.kind "about") }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ .Title | jsonify }},
+  "description": {{ with .Description }}{{ . | jsonify }}{{ else }}""{{ end }},
+  "url": {{ .Permalink | jsonify }},
+  "mainEntityOfPage": {{ .Permalink | jsonify }},
+  "datePublished": "{{ .PublishDate.Format "2006-01-02T15:04:05Z07:00" }}",
+  "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
+  "author": {
+    "@type": "Person",
+    "name": {{ site.Params.author | jsonify }},
+    "url": {{ site.Params.github | jsonify }}
+  },
+  "keywords": {{ with .Params.tags }}{{ delimit . ", " | jsonify }}{{ else }}""{{ end }},
+  "inLanguage": "zh-CN"
+}
+</script>
+{{ end }}
+
+{{ if eq .Params.kind "job" }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "JobPosting",
+  "title": {{ .Title | jsonify }},
+  "description": {{ plainify .Content | chomp | jsonify }},
+  "datePosted": "{{ .PublishDate.Format "2006-01-02T15:04:05Z07:00" }}",
+  "validThrough": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
+  "employmentType": "FULL_TIME",
+  "url": {{ .Permalink | jsonify }},
+  "hiringOrganization": {
+    "@type": "Organization",
+    "name": {{ .Params.company | jsonify }}{{ with .Params.companyUrl }},{{ end }}{{ with .Params.companyUrl }}"sameAs": {{ . | jsonify }}{{ end }}
+  },
+  "jobLocationType": "TELECOMMUTE",
+  "jobLocation": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": {{ .Params.location | jsonify }},
+      "addressCountry": {{ .Params.country | default "US" | jsonify }}
+    }
+  }{{ with and .Params.salaryMin .Params.salaryMax }},
+  "baseSalary": {
+    "@type": "MonetaryAmount",
+    "currency": "USD",
+    "value": {
+      "@type": "QuantitativeValue",
+      "minValue": {{ .Params.salaryMin }},
+      "maxValue": {{ .Params.salaryMax }},
+      "unitText": "YEAR"
+    }
+  }{{ end }},
+  "directApply": false
+}
+</script>
+{{ end }}
+
+{{ if eq .Params.kind "about" }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Y",
+  "url": {{ .Permalink | jsonify }},
+  "email": "mailto:{{ site.Params.email }}",
+  "jobTitle": {{ .Params.jobTitle | jsonify }},
+  "knowsAbout": {{ .Params.knowsAbout | jsonify }},
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": {{ site.Params.location | jsonify }},
+    "addressCountry": "CN"
+  },
+  "sameAs": [{{ site.Params.github | jsonify }}]
+}
+</script>
+{{ end }}
+
+{{ with .Params.faq }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {{ range $i, $f := . }}{{ if gt $i 0 }},{{ end }}{"@type": "Question", "name": {{ $f.q | jsonify }}, "acceptedAnswer": {"@type": "Answer", "text": {{ $f.a | plainify | jsonify }}}}{{ end }}
+  ]
+}
+</script>
+{{ end }}

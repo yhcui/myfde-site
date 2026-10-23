@@ -1,0 +1,62 @@
+{{ define "main" }}
+<div class="wrap">
+  <header class="list-head">
+    {{ with .Params.record }}
+    <p class="record-head">
+      <span class="record-code">{{ . }}</span>
+      <span class="record-meta">{{ $.PublishDate.Format "2006-01-02" }}{{ with site.Params.location }} · {{ . }}{{ end }}</span>
+    </p>
+    {{ end }}
+    <h1 class="list-title">{{ .Title }}</h1>
+    {{ .Content }}
+  </header>
+
+  {{ if eq .Params.listStyle "jobs" }}
+  <div class="ledger">
+    {{ range .RegularPages.ByDate.Reverse }}
+    <a class="job-row" href="{{ .RelPermalink }}">
+      <span class="job-row-company">{{ .Params.company }}</span>
+      <span class="job-row-body">
+        <span class="job-row-title">{{ .Title }}</span>
+        <span class="job-row-meta">{{ .Params.location }}，{{ .Params.type }}{{ with .Params.salary }} · {{ . }}{{ end }}</span>
+      </span>
+      <span class="job-row-meta-side">
+        {{ with .Params.status }}<span class="seal">{{ . }}</span>{{ end }}
+        <span class="doc-date">{{ .PublishDate.Format "2006-01-02" }}</span>
+      </span>
+    </a>
+    {{ end }}
+  </div>
+  {{ else }}
+  <div class="ledger">
+    {{ range .RegularPages.ByDate.Reverse }}
+    <a class="doc-row" href="{{ .RelPermalink }}">
+      <span class="doc-code">{{ with .Params.record }}{{ . }}{{ else }}REC{{ end }}</span>
+      <span class="doc-body">
+        <span class="doc-title">{{ .Title }}</span>
+        <span class="doc-desc">{{ with .Description }}{{ . }}{{ end }}</span>
+      </span>
+      <span class="doc-meta">
+        <span class="doc-date">{{ .PublishDate.Format "2006-01-02" }}</span>
+      </span>
+    </a>
+    {{ end }}
+  </div>
+  {{ end }}
+
+  {{ with .Sections }}
+  <div class="subsections">
+    {{ range . }}
+    <a class="doc-row" href="{{ .RelPermalink }}">
+      <span class="doc-code">{{ with .Params.record }}{{ . }}{{ else }}SEC{{ end }}</span>
+      <span class="doc-body">
+        <span class="doc-title">{{ .Title }}</span>
+        <span class="doc-desc">{{ with .Description }}{{ . }}{{ end }}</span>
+      </span>
+      <span class="doc-meta"><span class="doc-date">{{ printf "%d 篇" (len .RegularPages) }}</span></span>
+    </a>
+    {{ end }}
+  </div>
+  {{ end }}
+</div>
+{{ end }}

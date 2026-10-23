@@ -1,0 +1,11 @@
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-links">
+      <a href="mailto:{{ site.Params.email }}">{{ site.Params.email }}</a>
+      <a href="{{ site.Params.github }}" rel="me">GitHub</a>
+      <a href="{{ "index.xml" | relURL }}">RSS</a>
+      <a href="{{ "llms.txt" | relURL }}">llms.txt</a>
+    </div>
+    <p class="footer-note">© 2026 Y · myfde.top{{ with site.Params.icp }} · <a href="https://beian.miit.gov.cn/" rel="nofollow">{{ . }}</a>{{ end }}</p>
+  </div>
+</footer>

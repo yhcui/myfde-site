@@ -1,0 +1,10 @@
+/* Chroma 代码高亮 · 野战手册配色 */
+.chroma { background: transparent; }
+.chroma .k, .chroma .kd, .chroma .kn, .chroma .kt, .chroma .kr { color: var(--olive-deep); font-weight: 700; }
+.chroma .s, .chroma .sa, .chroma .sb, .chroma .sc, .chroma .sd, .chroma .si, .chroma .sr, .chroma .ss { color: var(--blue); }
+.chroma .c, .chroma .c1, .chroma .cm, .chroma .cs { color: var(--olive-faint); font-style: italic; }
+.chroma .m, .chroma .mb, .chroma .mf, .chroma .mh, .chroma .mi, .chroma .mo { color: var(--red); }
+.chroma .nf { color: var(--ink); font-weight: 700; }
+.chroma .nc { color: var(--blue); }
+.chroma .nt { color: var(--olive-deep); }
+.chroma .o, .chroma .p { color: var(--ink); }

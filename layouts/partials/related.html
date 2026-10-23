@@ -1,0 +1,21 @@
+{{ $related := slice }}
+{{ with .Params.tags }}
+  {{ range $p := site.RegularPages }}
+    {{ if and (ne $p.RelPermalink $.RelPermalink) ($p.Params.tags) }}
+      {{ if intersect $p.Params.tags $.Params.tags }}
+        {{ $related = $related | append $p }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ if gt (len $related) 0 }}
+<section class="related">
+  <h2 class="section-title">相关记录</h2>
+  {{ range first 4 (sort $related "Date" "desc") }}
+  <a class="recent-row" href="{{ .RelPermalink }}">
+    <span class="doc-date">{{ .PublishDate.Format "2006-01-02" }}</span>
+    <span class="recent-title">{{ .Title }}</span>
+  </a>
+  {{ end }}
+</section>
+{{ end }}

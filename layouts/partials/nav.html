@@ -1,0 +1,11 @@
+{{ $path := strings.TrimSuffix "/" $.RelPermalink }}
+{{ $best := "__none__" }}{{ $bestLen := -1 }}
+{{ range site.Menus.main }}{{ $u := strings.TrimSuffix "/" .URL }}{{ if and (strings.HasPrefix $path $u) (gt (len $u) $bestLen) }}{{ $best = $u }}{{ $bestLen = len $u }}{{ end }}{{ end }}
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="{{ site.Home.RelPermalink }}">Y<span class="nav-sep">/</span>前沿部署记录</a>
+    <div class="nav-links">
+      {{ range site.Menus.main }}<a href="{{ .URL }}"{{ if eq $best (strings.TrimSuffix "/" .URL) }} class="active"{{ end }}>{{ .Name }}</a>{{ end }}
+    </div>
+  </div>
+</nav>

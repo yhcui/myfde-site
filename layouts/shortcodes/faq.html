@@ -1,0 +1,8 @@
+<div class="faq">
+  {{ range .Page.Params.faq }}
+  <div class="faq-item">
+    <h3 class="faq-q">{{ .q }}</h3>
+    <div class="faq-a">{{ .a | markdownify }}</div>
+  </div>
+  {{ end }}
+</div>

@@ -1,0 +1,45 @@
+{{ define "main" }}
+<div class="wrap">
+  <header class="hero">
+    <h1 class="hero-title">把 AI 部署进真实业务。</h1>
+    <p class="hero-sub">FDE 路线的中文现场记录：概念、训练路径、工作机会，以及 AI Agent 实战。</p>
+    {{ partial "route.html" . }}
+  </header>
+
+  {{ with .Content }}
+  <section class="intro">
+    {{ . }}
+  </section>
+  {{ end }}
+
+  <section class="doc-index">
+    <h2 class="section-title">文件目录</h2>
+    {{ $docs := where site.Pages "Params.docIndex" true }}
+    {{ range sort $docs "Params.weight" }}
+      {{ $meta := .PublishDate.Format "2006-01-02" }}
+      {{ if eq .Kind "section" }}{{ $meta = printf "%d 篇在招" (len .RegularPages) }}{{ end }}
+      <a class="doc-row" href="{{ .RelPermalink }}">
+        <span class="doc-code">{{ .Params.record }}</span>
+        <span class="doc-body">
+          <span class="doc-title">{{ .Title }}</span>
+          <span class="doc-desc">{{ with .Description }}{{ . }}{{ end }}</span>
+        </span>
+        <span class="doc-meta">
+          {{ if lt (now.Sub .PublishDate).Hours 2160 }}<span class="doc-new">新</span>{{ end }}
+          <span class="doc-date">{{ $meta }}</span>
+        </span>
+      </a>
+    {{ end }}
+  </section>
+
+  <section class="recent">
+    <h2 class="section-title">最新记录</h2>
+    {{ range first 3 site.RegularPages.ByDate.Reverse }}
+      <a class="recent-row" href="{{ .RelPermalink }}">
+        <span class="doc-date">{{ .PublishDate.Format "2006-01-02" }}</span>
+        <span class="recent-title">{{ .Title }}</span>
+      </a>
+    {{ end }}
+  </section>
+</div>
+{{ end }}
