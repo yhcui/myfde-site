@@ -11,7 +11,7 @@ rssLimit = 20
 
 [params]
   author = "Y"
-  description = "FDE（Forward Deployed Engineer，前沿部署工程师）路线的中文现场记录：概念、训练路径、工作机会与 AI Agent 实战。"
+  description = "FDE（Forward Deployed Engineer，前沿部署工程师）路线的中文整理：概念、术语、训练路径、岗位行情，以及转 AI 的走法——给要走这条路的人。作者 Y，工程师，做 AI Agent 落地。"
   email = "cuiyuhui123@qq.com"
   github = "https://github.com/yhcui"
   location = "济南"
@@ -32,21 +32,16 @@ rssLimit = 20
   weight = 1
 
 [[menus.main]]
-  name = "训练"
-  url = "/fde/training/"
+  name = "AI"
+  url = "/ai/"
   weight = 2
 
 [[menus.main]]
-  name = "工作"
+  name = "机会"
   url = "/fde/jobs/"
   weight = 3
 
 [[menus.main]]
-  name = "AI"
-  url = "/ai/"
-  weight = 4
-
-[[menus.main]]
-  name = "关于"
+  name = "关于我"
   url = "/about/"
-  weight = 5
+  weight = 4

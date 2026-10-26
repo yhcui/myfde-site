@@ -6,12 +6,11 @@
     <circle class="route-node" cx="195" cy="84" r="5.5" />
     <circle class="route-node" cx="342" cy="84" r="5.5" />
     <circle class="route-node" cx="489" cy="84" r="5.5" />
-    <circle class="route-node route-node-site" cx="592" cy="84" r="6.5" />
-    <text class="route-label" x="48" y="118">实验室</text>
-    <text class="route-label" x="195" y="118">模型 API</text>
-    <text class="route-label" x="342" y="118">系统集成</text>
-    <text class="route-label" x="489" y="118">部署上线</text>
-    <text class="route-label route-label-site" x="592" y="118">客户现场</text>
+    <g class="route-site-group" tabindex="0" role="button" aria-label="客户现场节点，点击有发现" onclick="var e=document.getElementById('k1-easter');e.hidden=!e.hidden" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();var e=document.getElementById('k1-easter');e.hidden=!e.hidden}">
+      <circle class="route-node route-node-site" cx="592" cy="84" r="6.5" />
+      <text class="route-label route-label-site" x="592" y="118">客户现场</text>
+    </g>
     <text class="route-k1-label" x="540" y="46">K1 · 最后一公里</text>
   </svg>
+  <figcaption id="k1-easter" class="k1-easter" hidden>你已抵达 K1。剩下的路在 <a href="/y/">档案</a> 里。</figcaption>
 </figure>

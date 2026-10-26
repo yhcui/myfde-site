@@ -384,3 +384,10 @@ a:hover { color: var(--ink); text-decoration-color: var(--ink); }
   .route-node-site, .route-k1-label { animation: none; opacity: 1; }
   * { transition: none !important; animation-duration: 0.01s !important; }
 }
+
+/* ---------- 彩蛋 ---------- */
+.route-site-group { cursor: pointer; outline: none; }
+.route-site-group:hover .route-label-site, .route-site-group:focus .route-label-site { text-decoration: underline; }
+.k1-easter { margin-top: .5rem; font-size: .85rem; color: #56604C; text-align: center; }
+.footer-morse { opacity: .35; letter-spacing: .25em; text-decoration: none; }
+.footer-morse:hover { opacity: 1; }
