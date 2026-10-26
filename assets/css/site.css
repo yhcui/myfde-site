@@ -1,21 +1,24 @@
 /* ============================================================
-   myfde.top · 野战手册 Field Manual
-   纸 #F7F7F3 / 墨 #17191B / 橄榄 #56604C / 测绘蓝 #2F5A8A / 印章红 #C2371F
+   myfde.top · 青绿档案（千里江山）
+   白瓷 #FFFFFF / 墨 #23252A / 石青 #2A5A7E / 石绿 #3E8E7E / 朱砂 #C3272B
+   色在笔画里，不在色块里：路线图即青绿山水，K1 一笔朱砂。
+   原则：白瓷底，青为主，绿为辅，朱为印。
    ============================================================ */
 
 :root {
-  --paper: #F7F7F3;
-  --ink: #17191B;
-  --olive: #56604C;
-  --olive-deep: #3F4837;
-  --olive-faint: #85906F;
-  --wash: #ECEDE6;
-  --line: #D9DBD0;
-  --blue: #2F5A8A;
-  --red: #C2371F;
+  --paper: #FFFFFF;
+  --ink: #23252A;
+  --gray: #6B6E74;
+  --qing: #2A5A7E;        /* 石青：工作色（链接/导航/结构） */
+  --lv: #3E8E7E;          /* 石绿：辅助（章节条/节点） */
+  --qing-wash: #ECF3EE;   /* 青绿浅底：表头 */
+  --red: #C3272B;         /* 朱砂：印章、K1、新标 */
+  --line: #E7E9ED;        /* 唯一的浅线（冷调） */
+  --wash: #F2F4F7;        /* 悬停/引用底（青瓷灰） */
 
   --sans: -apple-system, "PingFang SC", "HarmonyOS Sans SC", "MiSans", "Microsoft YaHei", "Segoe UI", sans-serif;
-  --serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  --song: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  --fang: "FangSong", "STFangsong", "FangSong_GB2312", "Songti SC", "SimSun", serif;
   --mono: "Cascadia Code", "JetBrains Mono", Consolas, "SF Mono", "Courier New", monospace;
 }
 
@@ -33,63 +36,74 @@ body {
 
 img, svg { display: block; max-width: 100%; }
 
-a { color: var(--blue); text-decoration: underline; text-decoration-color: rgba(47, 90, 138, 0.4); text-underline-offset: 3px; }
+a {
+  color: var(--qing);
+  text-decoration: underline;
+  text-decoration-color: rgba(44, 78, 132, 0.35);
+  text-underline-offset: 3px;
+}
 a:hover { color: var(--ink); text-decoration-color: var(--ink); }
 
-:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+:focus-visible { outline: 2px solid var(--qing); outline-offset: 2px; }
 
-::selection { background: var(--olive); color: var(--paper); }
+::selection { background: #DFEBE6; color: var(--ink); }
 
 .wrap { max-width: 52rem; margin: 0 auto; padding: 0 1.25rem; }
 .main { min-height: 62vh; }
 
-/* ---------- 导航 ---------- */
+/* ---------- 导航：一条浅线 ---------- */
 
 .nav { border-bottom: 1px solid var(--line); }
-.nav-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem 1.5rem; padding-top: 0.85rem; padding-bottom: 0.85rem; }
-.nav-brand { font-family: var(--serif); font-weight: 700; font-size: 1.1rem; color: var(--ink); text-decoration: none; letter-spacing: 0.02em; }
-.nav-sep { color: var(--olive); margin: 0 0.3em; font-weight: 400; }
-.nav-links { display: flex; flex-wrap: wrap; gap: 0.2rem 1.1rem; }
-.nav-links a { color: var(--olive); text-decoration: none; font-size: 0.95rem; padding: 0.15rem 0; }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem 1.5rem; padding-top: 0.8rem; padding-bottom: 0.8rem; }
+.nav-brand { font-family: var(--song); font-weight: 700; font-size: 1.1rem; color: var(--ink); text-decoration: none; letter-spacing: 0.02em; }
+.nav-sep { color: var(--red); margin: 0 0.3em; font-weight: 400; }
+.nav-links { display: flex; flex-wrap: wrap; gap: 0.2rem 1.2rem; }
+.nav-links a { color: var(--gray); text-decoration: none; font-family: var(--fang); font-size: 1rem; padding: 0.15rem 0; }
 .nav-links a:hover { color: var(--ink); }
-.nav-links a.active { color: var(--ink); font-weight: 600; box-shadow: inset 0 -2px 0 var(--olive); }
+.nav-links a.active { color: var(--qing); font-weight: 700; box-shadow: inset 0 -2px 0 var(--qing); }
 
-/* ---------- 首页 hero ---------- */
+/* ---------- 首页 hero：白瓷底，路线图即青绿山水 ---------- */
 
-.hero { padding: 4rem 0 2.5rem; }
+.hero .wrap { padding-top: 3.6rem; padding-bottom: 2.6rem; }
 .hero-title {
-  font-family: var(--serif);
+  font-family: var(--song);
   font-weight: 700;
+  color: var(--ink);
   font-size: clamp(1.9rem, 5vw, 2.9rem);
   line-height: 1.35;
   letter-spacing: 0.01em;
 }
-.hero-sub { margin-top: 0.8rem; font-size: 1.1rem; color: var(--olive); }
+.hero-sub { margin-top: 0.7rem; font-family: var(--fang); font-size: 1.12rem; color: var(--gray); }
 
-/* 路线图：全站唯一动效（K1 段绘制 + 现场节点亮起） */
-.route { margin: 2.8rem 0 0; overflow-x: auto; }
+/* 路线图：青绿山水。山是底，路是线，朱砂小点走到客户现场 */
+.route { margin: 2.6rem 0 0; overflow-x: auto; }
 .route svg { width: 100%; min-width: 480px; height: auto; }
-.route-base { stroke: var(--line); stroke-width: 2.5; }
-.route-k1 {
-  stroke: var(--blue); stroke-width: 3.5; stroke-linecap: round;
-  stroke-dasharray: 103; stroke-dashoffset: 103;
-  animation: k1draw 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 0.5s forwards;
+.mtn-far { fill: var(--qing); fill-opacity: 0.07; }
+.mtn-near { fill: var(--lv); fill-opacity: 0.1; }
+.route-base {
+  stroke: url(#qinglv); stroke-width: 3; stroke-linecap: round;
+  stroke-dasharray: 544; stroke-dashoffset: 544;
+  animation: k1draw 1s cubic-bezier(0.22, 0.61, 0.36, 1) 0.3s forwards;
 }
-.route-node { fill: var(--paper); stroke: var(--olive); stroke-width: 2.5; }
-.route-node-site { fill: var(--blue); stroke: var(--blue); opacity: 0; animation: k1fade 0.5s ease-out 1.4s forwards; }
-.route-label { font-family: var(--sans); font-size: 15px; fill: var(--olive); text-anchor: middle; }
-.route-label-site { fill: var(--blue); font-weight: 700; }
-.route-k1-label { font-family: var(--mono); font-size: 14px; fill: var(--blue); text-anchor: middle; opacity: 0; animation: k1fade 0.5s ease-out 1.45s forwards; }
+.route-node { fill: var(--paper); stroke: var(--qing); stroke-width: 2; }
+.route-label { font-family: var(--fang); font-size: 15px; fill: var(--gray); text-anchor: middle; }
+.route-label-site { fill: var(--qing); font-weight: 700; }
+.route-k1-label { font-family: var(--mono); font-size: 14px; fill: var(--red); text-anchor: middle; opacity: 0; animation: k1fade 0.5s ease-out 1.45s forwards; }
 @keyframes k1draw { to { stroke-dashoffset: 0; } }
 @keyframes k1fade { to { opacity: 1; } }
 
+/* 朱砂行者：SVG 原生动画（见 route.html），走完全程到客户现场 */
+.route-traveler { fill: var(--red); pointer-events: none; }
+.route-pulse { fill: none; stroke: var(--red); stroke-width: 2; pointer-events: none; }
+.route-hit { fill: transparent; }
+
 /* ---------- 首页区块 ---------- */
 
-.intro { margin: 1rem 0 3rem; max-width: 44rem; }
+.intro { margin: 2rem 0 3rem; max-width: 44rem; }
 .intro p { font-size: 1.05rem; }
 
 .section-title {
-  font-family: var(--serif);
+  font-family: var(--song);
   font-size: 1.3rem;
   font-weight: 700;
   margin-bottom: 1.2rem;
@@ -98,13 +112,13 @@ a:hover { color: var(--ink); text-decoration-color: var(--ink); }
   content: "";
   display: block;
   width: 3rem;
-  height: 3px;
-  background: var(--olive);
+  height: 4px;
+  background: var(--lv);
   margin-top: 0.45rem;
 }
 .doc-index, .recent { margin-bottom: 3.5rem; }
 
-/* 文件目录行 */
+/* 文件目录行：一列对齐，仅浅横线 */
 .doc-row {
   display: grid;
   grid-template-columns: 5.5rem 1fr auto;
@@ -116,15 +130,14 @@ a:hover { color: var(--ink); text-decoration-color: var(--ink); }
 }
 .doc-row:first-of-type { border-top: 1px solid var(--line); }
 .doc-row:hover { background: var(--wash); }
-.doc-code { font-family: var(--mono); font-size: 0.85rem; color: var(--olive); }
+.doc-code { font-family: var(--mono); font-size: 0.85rem; color: var(--qing); }
 .doc-body { display: flex; flex-direction: column; gap: 0.1rem; }
 .doc-title { font-weight: 600; font-size: 1.05rem; color: var(--ink); line-height: 1.5; }
-.doc-row:hover .doc-title { color: var(--blue); }
-.doc-desc { font-size: 0.92rem; color: var(--olive); line-height: 1.6; }
+.doc-desc { font-family: var(--fang); font-size: 0.95rem; color: var(--gray); line-height: 1.6; }
 .doc-meta { display: flex; align-items: center; gap: 0.6rem; }
-.doc-date { font-family: var(--mono); font-size: 0.82rem; color: var(--olive); white-space: nowrap; }
+.doc-date { font-family: var(--mono); font-size: 0.82rem; color: var(--gray); white-space: nowrap; }
 .doc-new {
-  font-family: var(--serif);
+  font-family: var(--song);
   font-size: 0.72rem;
   font-weight: 700;
   color: var(--red);
@@ -146,13 +159,12 @@ a:hover { color: var(--ink); text-decoration-color: var(--ink); }
 .recent-row:first-of-type { border-top: 1px solid var(--line); }
 .recent-row:hover { background: var(--wash); }
 .recent-title { font-weight: 600; color: var(--ink); line-height: 1.6; }
-.recent-row:hover .recent-title { color: var(--blue); }
 
 /* ---------- 列表页 ---------- */
 
 .list-head { padding-top: 3rem; }
 .list-title {
-  font-family: var(--serif);
+  font-family: var(--song);
   font-size: clamp(1.6rem, 4vw, 2.2rem);
   font-weight: 700;
   line-height: 1.4;
@@ -176,8 +188,7 @@ a:hover { color: var(--ink); text-decoration-color: var(--ink); }
 .job-row-company { font-weight: 700; color: var(--ink); font-size: 1rem; }
 .job-row-body { display: flex; flex-direction: column; gap: 0.1rem; }
 .job-row-title { font-weight: 600; color: var(--ink); line-height: 1.5; }
-.job-row:hover .job-row-title { color: var(--blue); }
-.job-row-meta { font-size: 0.9rem; color: var(--olive); }
+.job-row-meta { font-family: var(--fang); font-size: 0.92rem; color: var(--gray); }
 .job-row-meta-side { display: flex; align-items: center; gap: 0.7rem; }
 .subsections { margin-bottom: 3rem; }
 
@@ -188,14 +199,14 @@ a:hover { color: var(--ink); text-decoration-color: var(--ink); }
   display: flex;
   flex-wrap: wrap;
   gap: 0.3rem 1.5rem;
-  font-family: var(--mono);
-  font-size: 0.82rem;
-  color: var(--olive);
+  font-family: var(--fang);
+  font-size: 0.88rem;
+  color: var(--gray);
   border-bottom: 1px solid var(--line);
   padding-bottom: 0.75rem;
 }
 .article-title {
-  font-family: var(--serif);
+  font-family: var(--song);
   font-size: clamp(1.6rem, 4vw, 2.3rem);
   font-weight: 700;
   line-height: 1.4;
@@ -204,8 +215,9 @@ a:hover { color: var(--ink); text-decoration-color: var(--ink); }
 .article-summary {
   margin: 1.3rem 0 0;
   padding-left: 1rem;
-  border-left: 3px solid var(--blue);
-  color: var(--olive);
+  border-left: 2px solid var(--qing);
+  font-family: var(--fang);
+  color: var(--gray);
   font-size: 1.05rem;
   max-width: 42rem;
 }
@@ -213,14 +225,14 @@ a:hover { color: var(--ink); text-decoration-color: var(--ink); }
 .article-body > * + * { margin-top: 1.1em; }
 
 .article-body h2 {
-  font-family: var(--serif);
+  font-family: var(--song);
   font-size: 1.45rem;
   font-weight: 700;
   margin-top: 2.4em;
   padding-bottom: 0.35rem;
   border-bottom: 1px solid var(--line);
 }
-.article-body h3 { font-family: var(--serif); font-size: 1.18rem; font-weight: 700; margin-top: 2em; }
+.article-body h3 { font-family: var(--song); font-size: 1.18rem; font-weight: 700; margin-top: 2em; }
 .article-body h4 { font-size: 1.05rem; font-weight: 700; margin-top: 1.8em; }
 
 .article-body ul, .article-body ol { padding-left: 1.6em; }
@@ -229,9 +241,9 @@ a:hover { color: var(--ink); text-decoration-color: var(--ink); }
 .article-body blockquote {
   margin: 1.6em 0;
   padding: 0.5rem 1.2rem;
-  border-left: 3px solid var(--olive);
   background: var(--wash);
-  color: var(--ink);
+  font-family: var(--fang);
+  color: var(--gray);
 }
 .article-body blockquote p { margin: 0.3rem 0; }
 
@@ -243,9 +255,8 @@ a:hover { color: var(--ink); text-decoration-color: var(--ink); }
   border-radius: 2px;
 }
 .article-body pre {
-  background: #EFEFE9;
+  background: var(--wash);
   border: 1px solid var(--line);
-  border-left: 3px solid var(--olive);
   padding: 1rem 1.2rem;
   overflow-x: auto;
   font-size: 0.9rem;
@@ -253,6 +264,7 @@ a:hover { color: var(--ink); text-decoration-color: var(--ink); }
 }
 .article-body pre code { background: none; padding: 0; font-size: 1em; }
 
+/* 规格表：上粗下粗，表头青花浅底——账册样式 */
 .article-body table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
 .article-body th {
   font-weight: 700;
@@ -260,6 +272,7 @@ a:hover { color: var(--ink); text-decoration-color: var(--ink); }
   padding: 0.5rem 0.6rem;
   border-top: 2px solid var(--ink);
   border-bottom: 1px solid var(--ink);
+  background: var(--qing-wash);
 }
 .article-body td { padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--line); vertical-align: top; }
 .article-body tr:last-child td { border-bottom: 2px solid var(--ink); }
@@ -277,16 +290,16 @@ a:hover { color: var(--ink); text-decoration-color: var(--ink); }
   margin: 1.4rem 0 0;
   padding: 0.85rem 1.1rem;
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.5);
+  background: var(--paper);
   font-size: 0.95rem;
 }
 .job-company { font-weight: 700; }
-.job-item { color: var(--olive); }
+.job-item { font-family: var(--fang); color: var(--gray); }
 
 /* 印章 */
 .seal {
   display: inline-block;
-  font-family: var(--serif);
+  font-family: var(--song);
   font-weight: 700;
   font-size: 0.85rem;
   line-height: 1.5;
@@ -301,9 +314,9 @@ a:hover { color: var(--ink); text-decoration-color: var(--ink); }
 /* FAQ */
 .faq { margin-top: 2.8em; }
 .faq-item { border-top: 1px solid var(--line); padding: 1.1rem 0; }
-.faq-item:first-child { border-top: 2px solid var(--ink); }
-.faq-q { font-family: var(--serif); font-size: 1.1rem; font-weight: 700; }
-.faq-a { margin-top: 0.4rem; padding-left: 0.9rem; border-left: 2px solid var(--olive); color: var(--ink); font-size: 1rem; line-height: 1.9; }
+.faq-item:first-child { border-top: 1px solid var(--line); }
+.faq-q { font-family: var(--song); font-size: 1.1rem; font-weight: 700; }
+.faq-a { margin-top: 0.4rem; color: var(--ink); font-size: 1rem; line-height: 1.9; }
 .faq-a p + p { margin-top: 0.5em; }
 
 /* 标签 / 相关 / 上下篇 */
@@ -312,13 +325,13 @@ a:hover { color: var(--ink); text-decoration-color: var(--ink); }
   display: inline-block;
   font-family: var(--mono);
   font-size: 0.78rem;
-  color: var(--olive);
+  color: var(--gray);
   border: 1px solid var(--line);
   padding: 0.08rem 0.5rem;
   margin: 0 0.4rem 0.4rem 0;
   text-decoration: none;
 }
-.tag:hover { color: var(--blue); border-color: var(--blue); }
+.tag:hover { color: var(--qing); border-color: var(--qing); }
 
 .related { margin-top: 3rem; }
 .article-nav {
@@ -335,39 +348,39 @@ a:hover { color: var(--ink); text-decoration-color: var(--ink); }
   color: var(--ink);
   line-height: 1.6;
 }
-.article-nav a:hover { border-color: var(--blue); }
-.article-nav a span { display: block; font-family: var(--mono); font-size: 0.75rem; color: var(--olive); margin-bottom: 0.25rem; }
+.article-nav a:hover { border-color: var(--qing); }
+.article-nav a span { display: block; font-family: var(--fang); font-size: 0.8rem; color: var(--gray); margin-bottom: 0.25rem; }
 .article-nav-next { text-align: right; }
 
 .article-license {
   margin-top: 2.6rem;
   border-top: 1px solid var(--line);
   padding-top: 0.8rem;
-  font-family: var(--mono);
-  font-size: 0.8rem;
-  color: var(--olive);
+  font-family: var(--fang);
+  font-size: 0.85rem;
+  color: var(--gray);
 }
 
 /* ---------- 404 ---------- */
 
 .notfound { padding: 5rem 0; }
-.notfound-code { font-family: var(--mono); font-size: 3rem; color: var(--blue); line-height: 1.2; }
-.notfound-title { font-family: var(--serif); font-size: 2rem; margin: 0.6rem 0 1rem; }
-.notfound-desc { color: var(--olive); margin-bottom: 2rem; }
+.notfound-code { font-family: var(--mono); font-size: 3rem; color: var(--red); line-height: 1.2; }
+.notfound-title { font-family: var(--song); font-size: 2rem; margin: 0.6rem 0 1rem; }
+.notfound-desc { font-family: var(--fang); color: var(--gray); margin-bottom: 2rem; }
 
-/* ---------- 页脚 ---------- */
+/* ---------- 页脚：一条浅线 ---------- */
 
-.footer { border-top: 1px solid var(--line); margin-top: 4rem; padding: 1.4rem 0; }
+.footer { border-top: 1px solid var(--line); margin-top: 4rem; padding: 1.4rem 0 2rem; }
 .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 2rem; }
-.footer-links a { font-size: 0.9rem; color: var(--olive); margin-right: 1.2rem; text-decoration: none; }
+.footer-links a { font-family: var(--fang); font-size: 0.92rem; color: var(--gray); margin-right: 1.2rem; text-decoration: none; }
 .footer-links a:hover { color: var(--ink); }
-.footer-note { font-size: 0.85rem; color: var(--olive); }
+.footer-note { font-size: 0.85rem; color: var(--gray); }
 .footer-note a { color: inherit; }
 
 /* ---------- 响应式 ---------- */
 
 @media (max-width: 640px) {
-  .hero { padding-top: 2.6rem; }
+  .hero .wrap { padding-top: 2.4rem; padding-bottom: 2rem; }
   .doc-row { grid-template-columns: 4rem 1fr; }
   .doc-meta { grid-column: 2; justify-self: start; margin-top: 0.25rem; }
   .recent-row { grid-template-columns: 5.5rem 1fr; }
@@ -380,14 +393,17 @@ a:hover { color: var(--ink); text-decoration-color: var(--ink); }
 /* ---------- 动效约束 ---------- */
 
 @media (prefers-reduced-motion: reduce) {
-  .route-k1 { animation: none; stroke-dashoffset: 0; }
-  .route-node-site, .route-k1-label { animation: none; opacity: 1; }
+  .route-base { animation: none; stroke-dashoffset: 0; }
+  .route-k1-label { animation: none; opacity: 1; }
+  .route-traveler, .route-pulse { display: none; }
   * { transition: none !important; animation-duration: 0.01s !important; }
 }
 
-/* ---------- 彩蛋 ---------- */
-.route-site-group { cursor: pointer; outline: none; }
-.route-site-group:hover .route-label-site, .route-site-group:focus .route-label-site { text-decoration: underline; }
-.k1-easter { margin-top: .5rem; font-size: .85rem; color: #56604C; text-align: center; }
-.footer-morse { opacity: .35; letter-spacing: .25em; text-decoration: none; }
+/* ---------- 彩蛋与注解 ---------- */
+.route-stop { cursor: pointer; outline: none; }
+.route-stop:hover .route-label, .route-stop:focus .route-label { fill: var(--qing); font-weight: 700; }
+.route-site-group:hover .route-label-site, .route-site-group:focus .route-label-site { fill: var(--red); text-decoration: underline; }
+.k1-note { margin-top: 0.6rem; font-family: var(--fang); font-size: 0.92rem; color: var(--gray); text-align: center; min-height: 1.6em; }
+.k1-note a { color: var(--red); }
+.footer-morse { opacity: .6; letter-spacing: .25em; text-decoration: none; }
 .footer-morse:hover { opacity: 1; }
