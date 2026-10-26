@@ -168,6 +168,61 @@ git reset --hard origin/deploy
 - 写作电脑开发、clone 用 GitHub；服务器拉取用 Gitee（国内网络原因）
 - Gitee 仓库：https://gitee.com/kuguagua/myfde-site （已绑定，deploy 脚本自动双推）
 
+### 访问统计（GoAccess，装在服务器上）
+
+nginx 的 access.log 已经记录了每一次访问，GoAccess 把它变成终端里的统计面板。
+不注册账号、不改网站代码、不装数据库，装完立刻能看历史数据。
+
+**1. 安装（一次性）**
+
+```bash
+apt update && apt install -y goaccess
+```
+
+**2. 使用（每次看数据时）**
+
+```bash
+goaccess /var/log/nginx/access.log --log-format=COMBINED --ignore-crawlers
+```
+
+打开就是实时面板。按键：
+
+| 键 | 作用 |
+|----|------|
+| `TAB` | 切换到下一个面板（按第一列面板序号 `1-2-3...` 跳转） |
+| `↑ ↓` | 面板内滚动，`END` 跳到底部 |
+| `q` | 退出当前面板 / 退出程序 |
+
+主要面板：总览（今日 PV/UV）、按天趋势、访客 IP、**热门页面**、来源站（从哪个网站点进来的）、浏览器/系统。
+
+`--ignore-crawlers` 把爬虫排除，看到的是接近真人的量；要看爬虫（含 GPTBot 等 AI 爬虫）用日志命令：
+
+```bash
+grep -oE "GPTBot|ClaudeBot|PerplexityBot|Baiduspider|Googlebot" /var/log/nginx/access.log | sort | uniq -c
+```
+
+**3. 建个快捷命令（一次性，可选）**
+
+```bash
+echo 'goaccess /var/log/nginx/access.log --log-format=COMBINED --ignore-crawlers' > /usr/local/bin/stats && chmod +x /usr/local/bin/stats
+```
+
+以后 SSH 上服务器，敲 `stats` 就看数据。
+
+**4. 数据保留**
+
+GoAccess 不存数据，保留多久取决于日志留多久。Ubuntu 默认按天切割、**保留 14 天**。
+想留一年，改一个数字：
+
+```bash
+nano /etc/logrotate.d/nginx    # 把 rotate 14 改成 365
+```
+
+个人站磁盘无压力（每天日志几 MB）。
+
+> 卸载随时：`apt remove goaccess`，网站里不留任何东西。
+> 哪天要看长期趋势图（半年增长曲线），再考虑百度统计或 GoAccess 持久化模式，两套可并存。
+
 ---
 
 ## 四、常见问题
