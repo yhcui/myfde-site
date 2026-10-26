@@ -6,15 +6,15 @@
    ============================================================ */
 
 :root {
-  --paper: #FFFFFF;
+  --paper: #F2F6F3;        /* 雨过天青：青瓷釉面 */
   --ink: #23252A;
   --gray: #6B6E74;
   --qing: #2A5A7E;        /* 石青：工作色（链接/导航/结构） */
   --lv: #3E8E7E;          /* 石绿：辅助（章节条/节点） */
-  --qing-wash: #ECF3EE;   /* 青绿浅底：表头 */
+  --qing-wash: #E7F0EB;   /* 青绿浅底：表头 */
   --red: #C3272B;         /* 朱砂：印章、K1、新标 */
-  --line: #E7E9ED;        /* 唯一的浅线（冷调） */
-  --wash: #F2F4F7;        /* 悬停/引用底（青瓷灰） */
+  --line: #E1E8E3;        /* 唯一的浅线（青调） */
+  --wash: #E9F0EC;        /* 悬停/引用底（青瓷灰） */
 
   --sans: -apple-system, "PingFang SC", "HarmonyOS Sans SC", "MiSans", "Microsoft YaHei", "Segoe UI", sans-serif;
   --song: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif;
@@ -46,7 +46,7 @@ a:hover { color: var(--ink); text-decoration-color: var(--ink); }
 
 :focus-visible { outline: 2px solid var(--qing); outline-offset: 2px; }
 
-::selection { background: #DFEBE6; color: var(--ink); }
+::selection { background: #DCE9E2; color: var(--ink); }
 
 .wrap { max-width: 52rem; margin: 0 auto; padding: 0 1.25rem; }
 .main { min-height: 62vh; }
