@@ -17,6 +17,9 @@ server {
     root /var/www/myfde;
     index index.html;
 
+    # 【追加】声明字符集：llms.txt 等纯文本文件防止浏览器猜错编码变乱码
+    charset utf-8;
+
     # 【追加】旧 URL 301（保住搜索引擎已有收录）
     # ⚠ 绝对不要加 `location = /index.html { return 301 /; }`
     #   它会被 index 模块的内部跳转命中，导致首页 301 死循环
