@@ -9,11 +9,21 @@
 - [FDE / AI Agent 术语表（中英对照）](https://myfde.top/fde/glossary/): FDE、FDSE、Agent、RAG、MCP、Guardrails、Evals、上下文工程等核心术语的中英对照与一句话定义。
 - [FDE vs 相邻岗位：一张对比表](https://myfde.top/fde/compare/): FDE 与解决方案工程师、技术交付、客户成功、AI 应用工程师的逐项对比及国内叫法对应。
 - [FDE 培训与入门路径](https://myfde.top/fde/training/): 从 K0 到 K4 的分阶段训练路线、每阶段自检清单与学习资源。
+- [FDE 求职全攻略](https://myfde.top/fde/fde-jobs-guide/): 国内 FDE 类岗位的叫法对照、目标公司类型、JD 解读法、作品集与面试准备、谈薪结构。
+- [从 Demo 到生产：AI 落地检查清单](https://myfde.top/fde/demo-to-production/): AI 系统上线的六道门——数据权限、评估、护栏、监控、回退、文档，附逐项检查表。
 - [FDE 工作机会](https://myfde.top/fde/jobs/): OpenAI、Palantir、Anthropic 等公司 FDE 相关岗位的在招信息整理。
 - [FDE 前沿部署工程师：AI 落地最后一公里](https://myfde.top/fde/fde-intro/): 为什么多数企业 AI 项目没有产生可写入财务报表的价值，以及 FDE 如何补上最后一公里。
 - [AI Agent 入门指南：从概念到实战](https://myfde.top/ai/agent-intro/): AI Agent 的定义、核心架构、主流框架对比与第一个 Agent 的搭建代码。
 - [工程师转 AI，别从模型开始，从 Agent 开始](https://myfde.top/ai/zhuan-ai-from-agent/): 给要转 AI 的工程师：三个论据说明为什么 Agent 工程是复用率最高的切入点，附五步路线与常见误区。
 - [MCP：让 AI 接上你的系统](https://myfde.top/ai/mcp-guide/): MCP（Model Context Protocol）的定义、解决的集成问题、Host/Client/Server 三层架构、三类原语与最小可运行示例。
+- [RAG 入门：让模型答对它没学过的知识](https://myfde.top/ai/rag-intro/): RAG 五步管线、五个最常见的坑与修法（切分、清洗、混合检索、引用拒答、评估），以及上线标准。
+- [Evals：AI 应用的质量底座](https://myfde.top/ai/evals-intro/): 三类评估、测试集怎么建、指标与 LLM-as-judge 校准、如何接进发布流程。
+- [上下文工程：比提示词更重要的手艺](https://myfde.top/ai/context-engineering/): 上下文四来源的优先级、历史摘要/工具结果瘦身/结构化三刀、三个反模式与缓存排序原则。
+- [多智能体：什么时候真的需要多个 Agent](https://myfde.top/ai/multi-agent/): 先泼冷水再讲拓扑——三个拆分信号、规划-执行/流水线/辩论三种结构与成本账。
+- [Tool Use：把模型变成系统的一部分](https://myfde.top/ai/tool-use/): 工具调用机制、schema 设计四军规、错误回传自纠、幂等与注入防御。
+- [Guardrails：给 AI 上安全带](https://myfde.top/ai/guardrails-intro/): 输入过滤、注入防御、输出校验、人工确认四道防线，附上线检查表。
+- [LangChain / AutoGen / CrewAI 怎么选](https://myfde.top/ai/framework-chooser/): 要不要框架的判断、三家横评、场景决策表、以及把模型调用/工具/评估留在自己手里的原则。
+- [Token 经济学：AI 应用的成本控制](https://myfde.top/ai/token-economics/): API 计费结构、五个降本杠杆（缓存/路由/批量/瘦身/蒸馏）、三个必装仪表与不该省的地方。
 - [关于我：Y 的公开档案](https://myfde.top/about/): 半匿名个人档案——在做什么、做事方式与求职意向。
 
 ## 站点元信息
