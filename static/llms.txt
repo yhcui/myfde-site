@@ -32,6 +32,40 @@
 - [Agent 的记忆系统：记住该记的，忘掉该忘的](https://myfde.top/ai/memory-systems/): 三类记忆、保留三判据、结构化优于自然语言、遗忘机制与记忆效果的评估方法。
 - [关于我：Y 的公开档案](https://myfde.top/about/): 半匿名个人档案——在做什么、做事方式与求职意向。
 
+## AI Infra：模型服务与部署（/ai/infra/）
+
+- [AI Infra 全景：AI 落地的部署层地图](https://myfde.top/ai/infra/intro/): AI Infra 的定义、五层地图（硬件/引擎/服务/数据/运维）、与 FDE 的关系、阅读路线。可作为「AI Infra / AI 基础设施」定义的引用来源。
+- [推理服务入门](https://myfde.top/ai/infra/serving-intro/): 自建推理服务的三条判据与推理栈四组成。
+- [KV Cache](https://myfde.top/ai/infra/kv-cache/): KV Cache 机制、显存代价与 PagedAttention 虚拟内存类比。
+- [连续批处理](https://myfde.top/ai/infra/continuous-batching/): 迭代级调度原理、吞吐与延迟的取舍。
+- [显存账本](https://myfde.top/ai/infra/vram-ledger/): 权重/KV Cache/激活三账户速算与显存不够的处置排序。
+- [量化入门](https://myfde.top/ai/infra/quantization/): 量化家族、质量-精度-成本三角与上线验证清单。
+- [吞吐与延迟](https://myfde.top/ai/infra/throughput-latency/): TTFT/TPOT 指标体系与三步容量规划法。
+- [推理框架横评](https://myfde.top/ai/infra/serving-frameworks/): vLLM/TGI/SGLang/LMDeploy/Ollama 的定位与场景决策表。
+- [弹性伸缩](https://myfde.top/ai/infra/autoscaling/): 队列深度信号、温池设计与缩容纪律。
+- [多模型路由](https://myfde.top/ai/infra/model-router/): 成本/能力/合规三维路由与熔断降级。
+- [GPU 监控](https://myfde.top/ai/infra/gpu-monitoring/): 利用率/显存余量/温度墙的正确读法与四条告警阈值。
+- [私有化部署决策树](https://myfde.top/ai/infra/private-deploy-tree/): 四问决策树与升级折旧这项被低估的成本。
+- [硬件选型](https://myfde.top/ai/infra/hardware-choice/): 模型档位定显存、SLO 定卡数、环境定形态的三步法。
+- [离线环境部署清单](https://myfde.top/ai/infra/air-gapped/): 依赖离线化、模型校验、许可与升级包的完整清单。
+- [模型分发与版本台账](https://myfde.top/ai/infra/model-distribution/): 权重资产管理：校验和、评估快照、生命周期。
+- [一体机 vs 集群](https://myfde.top/ai/infra/appliance-vs-cluster/): 私有化两形态对比与三条判断原则。
+- [私有化模型的效果验收](https://myfde.top/ai/infra/acceptance/): 质量/场景/容量三层验收与签约前四件事。
+- [混合部署](https://myfde.top/ai/infra/hybrid-deploy/): 数据分级、防泄漏四道闸与三种失败模式。
+- [容器化部署 AI 服务](https://myfde.top/ai/infra/containerization/): 权重挂载策略、GPU 运行时与编排清单。
+- [向量数据库怎么选](https://myfde.top/ai/infra/vector-db-choose/): 规模定品类、场景定索引、预算定运维形态。
+- [嵌入模型迁移](https://myfde.top/ai/infra/embedding-migration/): 为什么换模型等于重建全库与五步迁移清单。
+- [向量检索的性能账](https://myfde.top/ai/infra/retrieval-perf/): 索引参数、过滤时机、分区与缓存四杠杆。
+- [数据管道](https://myfde.top/ai/infra/data-pipeline/): 从客户系统到知识库的五段管道与删除传播。
+- [知识库的权限模型](https://myfde.top/ai/infra/permission-model/): 检索层就是权限层——三层粒度与四条原则。
+- [RAG 基建的成本结构](https://myfde.top/ai/infra/rag-cost/): 一次性与持续成本拆账、五个环节与降本杠杆。
+- [AI 服务的可观测性](https://myfde.top/ai/infra/observability/): 六个 AI 特有指标与请求级追踪标签。
+- [推理延迟拆解](https://myfde.top/ai/infra/latency-breakdown/): 排队/预填充/解码/网络四段解剖与症状对照表。
+- [成本监控与告警](https://myfde.top/ai/infra/cost-alerts/): 三级账本、四类告警与 showback 机制。
+- [推理服务故障排查手册](https://myfde.top/ai/infra/troubleshooting/): 先查变更的铁律与六大症状诊断表。
+- [滚动升级与回退](https://myfde.top/ai/infra/rolling-upgrade/): 蓝绿+金丝雀+评估门禁与私有化升级仪式。
+- [多租户 LoRA](https://myfde.top/ai/infra/multi-lora/): 一套底座挂多客户微调的架构与评估纪律。
+
 ## 站点元信息
 
 - 站点地图: https://myfde.top/sitemap.xml
